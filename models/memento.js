@@ -15,9 +15,10 @@ const MementoSchema = new Schema({
         default: Date.now
     },
     mood: {
-        type: String,
-        enum: ['HAPPY', 'SAD', 'ANGRY', 'FRUSTRATED', 'N/A'],
-        default: 'N/A'
+        type: Number,
+        min: 0,
+        max: 1,
+        default: 0.5
     },
     content: {
         type: String, 

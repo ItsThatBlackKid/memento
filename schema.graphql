@@ -1,0 +1,52 @@
+# This file was generated based on ".graphqlconfig". Do not edit manually.
+
+schema {
+    query: Query
+    mutation: Mutation
+}
+
+type Memento {
+    _id: ID!
+    content: String!
+    date: Date
+    mood: Float!
+    title: String!
+    user: User
+}
+
+type Mutation {
+    createMemento(input: MementoInput): Memento
+    createUser(input: UserInput): User
+    editMemento(_id: ID!, input: MementoInput): Memento
+    editName(name: String!, userId: ID!): User
+}
+
+type Query {
+    allMemento: [Memento]
+    getMemento(_id: ID!): Memento
+    getUser(_id: ID!): User
+}
+
+type User {
+    _id: ID!
+    email: String!
+    hash: String!
+    mementos: [Memento]
+    name: String!
+}
+
+input MementoInput {
+    content: String!
+    mood: Float!
+    title: String!
+    user: ID
+}
+
+input UserInput {
+    email: String!
+    hash: String!
+    name: String!
+}
+
+
+scalar Date
