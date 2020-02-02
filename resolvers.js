@@ -1,20 +1,71 @@
 import Memento from './models/memento';
 import User from './models/user'
+import gql from "graphql-tag"
+import {HttpLink} from "apollo-link-http"
+import {execute, makePromise} from "apollo-link"
+import fetch from "node-fetch"
+import {InMemoryCache} from "apollo-cache-inmemory";
+import {isEmpty} from "lodash/core";
 
-export const resolvers = {
+const uri = process.env.AUTH_URI || "http://test-sheku.com:5000/api";
+
+
+const GET_USER = gql`
+    query {
+        getUser {
+            _id
+            first_name
+            last_name
+            email
+            createdAt
+            updatedAt
+        }
+    }
+`;
+
+const resolvers = {
     Query: {
-        async allMemento() {
+        async allMemento(root, {}, {req}) {
             return await Memento.find();
         },
         async getMemento(root, {_id}) {
             return await Memento.findById(_id)
         },
+        async getUser(root, {}, {req, res}) {
+            let user = await User.findById(req.cookies.user_id);
+            console.log(user);
 
-        async getUser(root, {_id}) {
-            return await User.findById(_id)
-        }
+            if (isEmpty(user)) {
+                console.log("no user");
+                try {
+                    const link = new HttpLink({
+                        uri,
+                        fetch,
+                        headers: {
+                            'cookie': `jwt=${req.cookies.jwt}`
+                        },
+                        credentials: "include"
+                    });
+                    const {errors, data} = await makePromise(execute(link, {query: GET_USER}));
+
+                    if (errors) {
+                        throw errors;
+                    }
+                    console.log(data.getUser);
+
+                    user = data.getUser;
+                    await User.create(user);
+                    return user
+                } catch (e) {
+                    throw e;
+                }
+            }
+
+            return user
+        },
     },
     Mutation: {
+
         async createUser(root, {input}) {
             return await User.create(input);
         },
@@ -22,18 +73,14 @@ export const resolvers = {
             return await Memento.create(input);
         },
 
-        async editMood(root, {_id,mood}) {
-            var memento =  await Memento.findById(_id);
-
-            memento.mood = mood;
-            return await memento.save();
+        async editMemento(root, {_id, input}) {
+            return await Memento.findOneAndUpdate({_id}, input)
         },
 
-        async editName(root, {id, name}) {
-            var user = await User.findById(id)
-            user.name = name;
-
-            return await user.save();
+        async editName(root, {_id, name}) {
+            return await Memento.findOneAndUpdate({_id}, name)
         }
     }
 }
+
+export default resolvers

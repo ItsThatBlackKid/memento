@@ -1,13 +1,17 @@
 import {makeExecutableSchema} from 'graphql-tools';
 import {resolvers} from './resolvers';
+import {gql} from "apollo-server-express"
 
-const typeDefs = `
+const typeDefs = gql`
     type User {
         _id: ID!
-        name: String!
+        username: String
+        first_name: String
+        last_name: String
         email: String!
-        hash: String!
         mementos: [Memento]
+        createdAt: Date
+        updatedAt: Date
     }
 
     type Memento {
@@ -16,15 +20,16 @@ const typeDefs = `
         title: String!
         date: Date
         content: String!
-        mood: String
+        mood: Float!
     }
 
-    scalar Date 
+    scalar Date
 
     type Query {
         allMemento: [Memento]
         getMemento(_id: ID!): Memento
-        getUser(_id: ID!): User
+        getUser: User
+
     }
 
     input UserInput {
@@ -37,20 +42,16 @@ const typeDefs = `
         user: ID
         title: String!
         content: String!
-        mood: String
+        mood: Float!
     }
 
     type Mutation {
         createUser(input: UserInput): User
         createMemento(input: MementoInput): Memento
-        editMood (_id: ID!, mood: String!): Memento
+        editMemento (_id: ID!, input: MementoInput): Memento
         editName(userId: ID!, name: String!): User
     }
-    `;
+`;
 
-    const schema = makeExecutableSchema({
-        typeDefs,
-        resolvers
-    });
 
-    export default schema;
+export default typeDefs;
