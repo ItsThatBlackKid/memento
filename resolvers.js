@@ -6,6 +6,7 @@ import {execute, makePromise} from "apollo-link"
 import fetch from "node-fetch"
 import {InMemoryCache} from "apollo-cache-inmemory";
 import {isEmpty} from "lodash/core";
+import {createApolloFetch} from "apollo-fetch";
 
 const uri = process.env.AUTH_URI || "http://test-sheku.com:5000/api";
 
@@ -23,12 +24,41 @@ const GET_USER = gql`
     }
 `;
 
+const VERIFY = gql`
+    {
+        verify
+    }
+`
+
 const resolvers = {
     Query: {
         async allMemento(root, {}, {req}) {
+            const {jwt, user_id} = req.cookies;
+
+            const link = new HttpLink({
+                uri,
+                fetch,
+                headers: {
+                    'cookie': `jwt=${req.cookies.jwt}`
+                },
+                credentials: "include"
+            });
+
+            const {error, data} = await makePromise(execute(link, {query: VERIFY}));
+
+            if (error) {
+                throw  error
+            }
+
+            if (data.verify) {
+                return await Memento.find({user: user_id})
+            }
+
             return await Memento.find();
         },
         async getMemento(root, {_id}) {
+            console.log(_id);
+            console.log(await Memento.findById(_id));
             return await Memento.findById(_id)
         },
         async getUser(root, {}, {req, res}) {
@@ -69,11 +99,34 @@ const resolvers = {
         async createUser(root, {input}) {
             return await User.create(input);
         },
-        async createMemento(root, {input}) {
+        async createMemento(root, {input}, {req}) {
+            const {jwt, user_id} = req.cookies;
+
+            const link = new HttpLink({
+                uri,
+                fetch,
+                headers: {
+                    'cookie': `jwt=${req.cookies.jwt}`
+                },
+                credentials: "include"
+            });
+
+            const {error, data} = await makePromise(execute(link, {query: VERIFY}));
+
+            if(error) {
+                throw error
+            }
+
+            if(data.verify) {
+                return await Memento.create({user: user_id, ...input})
+            }
+
+
             return await Memento.create(input);
         },
 
         async editMemento(root, {_id, input}) {
+            console.log(input);
             return await Memento.findOneAndUpdate({_id}, input)
         },
 
