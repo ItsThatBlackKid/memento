@@ -39,6 +39,18 @@
           </option>
           <option name="userDatabase" value="memento" />
         </ServerConfiguration>
+        <ServerConfiguration>
+          <option name="label" value="mementob" />
+          <option name="serverUrls">
+            <list>
+              <option value="localhost:27017" />
+            </list>
+          </option>
+          <option name="sshTunnelingConfiguration">
+            <SshTunnelingConfiguration />
+          </option>
+          <option name="userDatabase" value="memento" />
+        </ServerConfiguration>
       </list>
     </option>
   </component>

@@ -43,6 +43,7 @@ const typeDefs = gql`
         title: String!
         content: String!
         mood: Float!
+        date: Date
     }
 
     type Mutation {
