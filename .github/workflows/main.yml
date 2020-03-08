@@ -1,0 +1,26 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Deploy Memento
+
+# Controls when the action will run. Triggers the workflow on push or pull request 
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  cd:
+     runs-on: ubuntu-latest
+
+     steps:
+       - uses: actions/checkout@v2
+       - name: Docker login
+         run: docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASS}}  
+       - name: Build
+         run: docker-compose up -d
+       - name: Push
+         run: docker-compose push
