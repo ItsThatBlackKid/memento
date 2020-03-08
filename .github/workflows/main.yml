@@ -20,7 +20,11 @@ jobs:
        - uses: actions/checkout@v2
        - name: Docker login
          run: docker login -u ${{secrets.DOCKER_USER}} -p ${{secrets.DOCKER_PASS}}  
-       - name: Build
+       - name: Create Context
+         run: docker context create remote --docker "ssh://sheku@sheku-kanneh.com"
+       - name: Set context
+         run: docker context use remote
+       - name: Builds
          run: docker-compose up -d
        - name: Push
          run: docker-compose push
