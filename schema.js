@@ -18,7 +18,7 @@ const typeDefs = gql`
         _id: ID!
         user: User
         title: String!
-        date: Date
+        date: Date!
         content: String!
         mood: Float!
     }
@@ -43,6 +43,7 @@ const typeDefs = gql`
         title: String!
         content: String!
         mood: Float!
+        date: Date
     }
 
     type Mutation {

@@ -8,7 +8,7 @@ schema {
 type Memento {
     _id: ID!
     content: String!
-    date: Date
+    date: Date!
     mood: Float!
     title: String!
     user: User
@@ -24,15 +24,23 @@ type Mutation {
 type Query {
     allMemento: [Memento]
     getMemento(_id: ID!): Memento
-    getUser(_id: ID!): User
+    getUser: User
 }
 
 type User {
     _id: ID!
+    createdAt: Date
     email: String!
-    hash: String!
+    first_name: String
+    last_name: String
     mementos: [Memento]
-    name: String!
+    updatedAt: Date
+    username: String
+}
+
+enum CacheControlScope {
+    PRIVATE
+    PUBLIC
 }
 
 input MementoInput {
@@ -50,3 +58,6 @@ input UserInput {
 
 
 scalar Date
+
+"The `Upload` scalar type represents a file upload."
+scalar Upload

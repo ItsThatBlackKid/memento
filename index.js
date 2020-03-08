@@ -1,5 +1,4 @@
 import express from "express";
-import graphlHTTP from "express-graphql";
 import cors from "cors";
 import morgan from "morgan";
 import mongoose from "mongoose";
