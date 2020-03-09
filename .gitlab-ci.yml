@@ -1,5 +1,4 @@
 image: docker:19.03.01
-
 variables: 
   DOCKER_TLS_CERTDIR: "/certs"
 services: 
@@ -13,7 +12,7 @@ build:
   script: 
     - docker-compose build --no-cache
  
- deploy:
+deploy:
  stage: deploy
  script:
   - docker-compose up -d
