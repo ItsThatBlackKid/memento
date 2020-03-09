@@ -9,13 +9,17 @@ before_script:
   - docker info
 
 build:
+  tags:
+    - memento
   stage: build
   script:
     - sudo apt install docker-compose
     - docker-compose build --no-cache
  
 deploy:
- stage: deploy
+  tags:
+    - memento
+  stage: deploy
  script:
    - sudo apt install docker-compose
    - docker-compose up -d
