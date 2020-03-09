@@ -15,7 +15,7 @@ services:
     networks:
       - memento
     ports:
-      - 2701:2701
+      - 27017:27017
   api:
     build:
       context: .
@@ -46,7 +46,7 @@ services:
     networks:
       - memento
     volumes:
-      - web-root:/srv/mement/ui/build/
+      - ./build:web-root
       - ./build:/srv/memento/ui
     image: client:memento
     container_name: mementoclient
