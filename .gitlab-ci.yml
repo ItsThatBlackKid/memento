@@ -1,8 +1,5 @@
-image:
-  name: docker/compose:latest
-  entrypoint:
-    - "/bin/sh"
-    - "-c"
+image: docker/compose:latest
+
 
 services:
   - docker:dind
@@ -10,22 +7,20 @@ variables:
   DOCKERHOST: tcp//docker:2375/
   DOCKER_TLS_CERTDIR: "/certs"
   GIT_SUBMODULE_STRATEGY: recursive
-  
+
 before_script:
   - docker verison
   - docker-compose version
 
 build:
-  stage:
-    - build
+  stage: build
   tags:
     - memento
   script:
     - docker-compose build --no-cache
- 
+
 deploy:
-  stage:
-    - deploy
+  stage: deploy
   tags:
     - memento
  script:
