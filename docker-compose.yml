@@ -1,0 +1,91 @@
+version: '3.6'
+volumes:
+  mongo_data:
+  certbot-etc:
+  certbot-var:
+  web-root:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/gitlab-runner/memento/memento-ui/build
+      o: bind
+networks:
+  memento:
+    driver: bridge
+services:
+  #memento api
+  db:
+    image: mongo
+    restart: always
+    networks:
+      - memento
+    ports:
+      - 2701:2701
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - /srv/memento/api
+    image: api:memento
+    container_name: mementoapi
+    restart: unless-stopped
+    depends_on:
+      - db
+    networks:
+      - memento
+    links:
+      - db
+    environment:
+      - MONGO_HOST=mongo:27017
+      - PORT=8000
+    ports:
+      - '8000:8000'
+  #memento db
+
+  #memento client
+  client:
+    build:
+      context: ./memento-ui
+      dockerfile: ./dockerfile
+    ports:
+      - '8080:8080'
+    networks:
+      - memento
+    volumes:
+      - /srv/memento/ui
+    image: client:memento
+    container_name: mementoclient
+    restart: unless-stopped
+
+  webserver:
+    image: nginx:mainline-alpine
+    container_name: webserver
+    restart: unless-stopped
+    ports:
+      - '80:80'
+    volumes:
+      - web-root:/var/www/html
+      - ./nginx-conf:/etc/nginx/conf.d
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+    depends_on:
+      - api
+      - db
+      - client
+    networks:
+      - memento
+
+  certbot:
+    image: certbot/certbot
+    container_name: certbot
+    networks:
+      - memento
+    volumes:
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+      - web-root:/var/www/html
+    depends_on:
+      - webserver
+    command: certonly --webroot --webroot-path=/var/www/html --email sheku.kanneh12@gmail.com --agree-tos --no-eff-email --staging -d memento.sheku-kanneh.com
+

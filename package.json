@@ -2,10 +2,14 @@
   "name": "memento",
   "version": "1.0.0",
   "description": "mental health journal built for me, by me.",
-  "main": "index.js",
+  "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --ignore 'memento-ui/' ./index.js --exec babel-node -e js"
+    "start": "nodemon --ignore 'memento-ui/' src/index.js --exec babel-node -e js",
+    "start-build": "node ./build/index.js",
+    "prebuild": "npm run clean",
+    "build": "babel ./src -d ./build  --ignore node_modules,memento-ui",
+    "clean": "rm -rf ./build"
   },
   "author": "Sao Sheku Kanneh",
   "license": "MIT",
@@ -15,22 +19,26 @@
     "apollo-fetch": "^0.7.0",
     "apollo-link": "^1.2.13",
     "apollo-link-http": "^1.5.16",
-    "apollo-server-express": "^2.9.16",
+    "apollo-server-express": "^2.11.0",
     "cookie-parser": "^1.4.4",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-graphql": "^0.9.0",
-    "graphql": "^14.5.8",
-    "graphql-tag": "^2.10.1",
-    "graphql-tools": "^4.0.6",
-    "mongoose": "^5.8.1",
+    "graphql": "^14.6.0",
+    "graphql-tag": "^2.10.3",
+    "graphql-tools": "^4.0.7",
+    "mongoose": "^5.9.3",
     "morgan": "^1.9.1",
     "node-fetch": "^2.6.0",
     "nodemon": "^2.0.2"
   },
   "devDependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-stage-0": "^6.24.1"
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.8.7",
+    "@babel/node": "^7.8.7",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-transform-modules-commonjs": "^7.8.3",
+    "@babel/preset-env": "^7.8.7",
+    "@babel/preset-flow": "^7.8.3"
   }
 }
