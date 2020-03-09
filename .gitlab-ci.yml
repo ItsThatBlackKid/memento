@@ -5,16 +5,14 @@ before_script:
 build:
   script:
     - docker-compose build --no-cache
-  stage:
-    - "build"
+  stage: build
   tags:
     - memento
 
 deploy:
   script:
     - docker-compose up -d
-  stage:
-    - "deploy"
+  stage: deploy
   tags:
     - memento
 
