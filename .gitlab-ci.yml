@@ -1,5 +1,4 @@
 before_script:
-  - who
   - docker version
   - docker-compose version
   - git submodule sync --recursive
