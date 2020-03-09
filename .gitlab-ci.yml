@@ -6,7 +6,7 @@ build:
   script:
     - docker-compose build --no-cache
   stage:
-    - build
+    - "build"
   tags:
     - memento
 
@@ -14,7 +14,7 @@ deploy:
   script:
     - docker-compose up -d
   stage:
-    - deploy
+    - "deploy"
   tags:
     - memento
 
