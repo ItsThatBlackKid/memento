@@ -47,7 +47,7 @@ services:
   client:
     build:
       context: ./memento-ui
-      dockerfile: ./dockerfile
+      dockerfile: Dockerfile
     ports:
       - '8080:8080'
     networks:
