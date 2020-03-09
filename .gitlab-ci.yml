@@ -9,10 +9,12 @@ before_script:
 
 build:
   stage: build
-  script: 
+  script:
+    - sudo apt install docker-compose
     - docker-compose build --no-cache
  
 deploy:
  stage: deploy
  script:
-  - docker-compose up -d
+   - sudo apt install docker-compose
+   - docker-compose up -d
