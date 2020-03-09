@@ -1,9 +1,9 @@
 image: docker/compose:latest
 
 services:
-  - docker:latest-dind
+  - docker:dind
+
 variables:
-  DOCKERHOST: tcp//docker:2375/
   DOCKER_TLS_CERTDIR: "/certs"
   GIT_SUBMODULE_STRATEGY: recursive
 
