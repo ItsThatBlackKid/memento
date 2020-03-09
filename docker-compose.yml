@@ -12,6 +12,9 @@ services:
   db:
     image: mongo
     restart: always
+    container_name: mongodb
+    volumes:
+    - ./data:/data/db
     networks:
       - memento
     ports:
