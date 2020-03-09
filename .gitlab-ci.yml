@@ -1,7 +1,3 @@
-image: docker/compose:latest
-
-services:
-  - docker:dind
 
 variables:
   DOCKER_TLS_CERTDIR: "/certs"
@@ -12,14 +8,16 @@ before_script:
   - docker-compose version
 
 build:
-  stage: build
+  stage:
+    - build
   tags:
     - memento
   script:
     - docker-compose build --no-cache
 
 deploy:
-  stage: deploy
+  stage:
+    - deploy
   tags:
     - memento
  script:
