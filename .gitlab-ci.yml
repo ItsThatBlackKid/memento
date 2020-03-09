@@ -1,7 +1,7 @@
 before_script:
   - docker version
   - docker-compose version
-  - docker system prune --volumes
+  - docker system prune -f
   - git submodule sync --recursive
   - git submodule update --init --recursive --remote
 
