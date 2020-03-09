@@ -1,19 +1,18 @@
 FROM node:12.16.1-alpine
 
-
+RUN mkdir -p /srv/memento/api && chown -R node:node /srv/memento/
 
 WORKDIR /srv/memento/api
 
 COPY package*.json ./
 USER root
 
-ADD package*.json /tmp/
-RUN cd /tmp && npm ci -only=production
-RUN cp -a /tmp/node_modules/ /srv/memento/api
-WORKDIR /srv/memento/api
+RUN npm ci --only=production
+RUN npm i -g npm-install-changed
+RUN npm install-changed
 
 COPY . .
-RUN ls -la
+
 
 RUN npm run build
 
