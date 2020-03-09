@@ -1,6 +1,7 @@
 image: docker:latest
 variables: 
   DOCKER_TLS_CERTDIR: "/certs"
+  GIT_SUBMODULE_STRATEGY: recursive
 services: 
   - docker:dind
   
