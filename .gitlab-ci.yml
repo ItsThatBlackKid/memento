@@ -4,7 +4,7 @@ variables:
 before_script:
   - docker version
   - docker-compose version
-  - docker volume prune -f
+  - docker volume rm memento_web-root -f
   - git submodule sync --recursive
   - git submodule update --init --recursive --remote
 
