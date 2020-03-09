@@ -2,6 +2,9 @@ before_script:
   - docker version
   - docker-compose version
 
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+
 build:
   script:
     - docker-compose build --no-cache
