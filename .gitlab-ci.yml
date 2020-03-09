@@ -1,8 +1,7 @@
 image: docker/compose:latest
 
-
 services:
-  - docker:dind
+  - docker:latest-dind
 variables:
   DOCKERHOST: tcp//docker:2375/
   DOCKER_TLS_CERTDIR: "/certs"
