@@ -3,7 +3,7 @@ volumes:
   mongo_data:
   certbot-etc:
   certbot-var:
-
+  web-root:
 networks:
   memento:
     driver: bridge
