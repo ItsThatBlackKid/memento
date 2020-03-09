@@ -11,8 +11,9 @@ ADD package*.json /tmp/
 RUN cd /tmp && npm ci -only=production
 RUN cp -a /tmp/node_modules/ /srv/memento/api
 WORKDIR /srv/memento/api
-COPY . .
 
+COPY . .
+RUN ls -la
 
 RUN npm run build
 
