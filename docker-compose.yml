@@ -4,6 +4,11 @@ volumes:
   certbot-etc:
   certbot-var:
   web-root:
+    driver: local
+    driver_opts:
+      type: none
+      device: /home/sheku/memento/memento-ui/build
+      o: bind
 networks:
   memento:
     driver: bridge
