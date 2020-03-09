@@ -46,7 +46,7 @@ services:
     networks:
       - memento
     volumes:
-      - ./build:web-root
+      - web-root:/srv/memento/ui/build
       - ./build:/srv/memento/ui
     image: client:memento
     container_name: mementoclient
