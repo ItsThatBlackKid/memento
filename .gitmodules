@@ -1,4 +1,4 @@
 [submodule "memento-ui"]
 	path = memento-ui
-	url = https://github.com/ItsThatBlackKid/memento-ui.git
+	url = ../../memento-ui/.git
 
