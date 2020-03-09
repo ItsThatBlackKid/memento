@@ -3,12 +3,7 @@ volumes:
   mongo_data:
   certbot-etc:
   certbot-var:
-  web-root:
-    driver: local
-    driver_opts:
-      type: none
-      device: /home/gitlab-runner/memento/memento-ui/build
-      o: bind
+
 networks:
   memento:
     driver: bridge
@@ -26,6 +21,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
+      - web-root: /srv/memento/
       - /srv/memento/api
     image: api:memento
     container_name: mementoapi
@@ -53,6 +49,7 @@ services:
     networks:
       - memento
     volumes:
+      - web-root: /srv/memento
       - /srv/memento/ui
     image: client:memento
     container_name: mementoclient
@@ -65,7 +62,7 @@ services:
     ports:
       - '80:80'
     volumes:
-      - web-root:/var/www/html
+      - web-root: /var/www/html
       - ./nginx-conf:/etc/nginx/conf.d
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/lib/letsencrypt
