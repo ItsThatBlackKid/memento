@@ -10,7 +10,7 @@ USER root
 ADD package*.json /tmp/
 RUN cd /tmp && npm ci -only=production
 WORKDIR /srv/memento/api
-RUN cp -a /tmp/node_modules .
+RUN cp -a /tmp/node_modules/ .
 
 COPY . .
 
