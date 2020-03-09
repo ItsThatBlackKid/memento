@@ -1,7 +1,13 @@
-image: docker/compose:latest
+image:
+  name: docker/compose:latest
+  entrypoint:
+    - "/bin/sh"
+    - "-c"
+
 services:
   - docker:dind
-variables: 
+variables:
+  DOCKERHOST: tcp//docker:2375/
   DOCKER_TLS_CERTDIR: "/certs"
   GIT_SUBMODULE_STRATEGY: recursive
   
