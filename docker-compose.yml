@@ -21,7 +21,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - web-root: /srv/memento/
+      - web-root:/srv/memento/
       - /srv/memento/api
     image: api:memento
     container_name: mementoapi
