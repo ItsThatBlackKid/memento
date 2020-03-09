@@ -1,19 +1,19 @@
-image: docker:latest
-services:
-  - docker:dind
+image: docker:19.03.01
+
+variables: 
+  DOCKER_TLS_CERTDIR: "/certs"
+services: 
+  - docker:19.03.1-dind
   
-  stages:
-    - deploy
-    
-    step-deploy-production:
-      stage: deploy
-      only: 
-        - master
-      tags:
-        - production
-      script:
-        - echo "Setting up memento"
-        - sudo docker image prune -f
-        - sudo docker-compose build --no-cache
-        - sudo docker-compose up -d
-    when: manual
+before_script:
+  - docker info
+
+build:
+  stage: build
+  script: 
+    - docker-compose build --no-cache
+ 
+ deploy:
+ stage: deploy
+ script:
+  - docker-compose up -d
