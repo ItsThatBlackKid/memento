@@ -9,7 +9,8 @@ before_script:
   - docker info
 
 build:
-  stage: build
+  stage:
+    - build
   tags:
     - memento
   script:
@@ -17,7 +18,8 @@ build:
     - docker-compose build --no-cache
  
 deploy:
-  stage: deploy
+  stage:
+    - deploy
   tags:
     - memento
  script:
