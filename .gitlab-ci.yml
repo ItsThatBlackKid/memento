@@ -1,5 +1,5 @@
 image: docker/compose:latest
--services:
+services:
   - docker:dind
 variables: 
   DOCKER_TLS_CERTDIR: "/certs"
