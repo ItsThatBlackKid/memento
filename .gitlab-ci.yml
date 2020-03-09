@@ -1,9 +1,8 @@
 before_script:
   - docker version
   - docker-compose version
-
-variables:
-  GIT_SUBMODULE_STRATEGY: recursive
+  - git submodule sync --recursive
+  - git submodule update --init --recursive --remote
 
 build:
   script:
