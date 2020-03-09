@@ -1,14 +1,15 @@
 FROM node:12.16.1-alpine
 
-RUN mkdir -p /srv/memento/api && chown -R node:node /srv/memento/
+
 
 WORKDIR /srv/memento/api
 
 COPY package*.json ./
 USER root
 
-RUN npm ci --only=production
-RUN npm i
+ADD package.json /tmp/package.json
+RUN cd /tmp && npm ci
+RUN mkdir - p /srv/memento/api && cp -a /tmp/node_modules /srv/memento/api
 
 COPY . .
 
