@@ -4,8 +4,8 @@ variables:
 before_script:
   - docker version
   - docker-compose version
-  - docker system prune -f
-  - docker volume prune -f
+  - docker system prune -f # remove unused containers, images, etc.
+  - docker volume prune -f # remove unused volumes
   - git submodule sync --recursive
   - git submodule update --init --recursive --remote
 

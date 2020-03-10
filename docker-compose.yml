@@ -24,7 +24,7 @@ services:
       context: .
       dockerfile: Dockerfile
     image: api:memento
-    container_name: mementoapi
+    container_name: memento_api
     restart: unless-stopped
     depends_on:
       - db
@@ -40,19 +40,19 @@ services:
   #memento db
 
   #memento client
-  client:
-    build:
-      context: ./memento-ui
-      dockerfile: Dockerfile
-    ports:
-      - '8080:8080'
-    networks:
-      - memento
-    volumes:
-      - web-root:/srv/memento/ui/build
-    image: client:memento
-    container_name: mementoclient
-    restart: unless-stopped
+#  client:
+#    build:
+#      context: ./memento-ui
+#      dockerfile: Dockerfile
+#    ports:
+#      - '8080:8080'
+#    networks:
+#      - memento
+#    volumes:
+#      - web-root:/srv/memento/ui/build
+#    image: client:memento
+#    container_name: mementoclient
+#    restart: unless-stopped
 
   webserver:
     image: nginx:mainline-alpine
@@ -68,7 +68,6 @@ services:
     depends_on:
       - api
       - db
-      - client
     networks:
       - memento
 
