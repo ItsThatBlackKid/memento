@@ -6,6 +6,7 @@ volumes:
   web-root:
 networks:
   memento:
+    name: memento
     driver: bridge
 services:
   #memento api
