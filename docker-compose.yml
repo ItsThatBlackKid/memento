@@ -3,9 +3,6 @@ volumes:
   mongo_data:
   certbot-etc:
   certbot-var:
-  web-root:
-    name: mement_web-root
-    external: true
 networks:
   memento:
     name: memento
