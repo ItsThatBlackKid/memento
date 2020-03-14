@@ -58,7 +58,8 @@ services:
     image: nginx:mainline-alpine
     container_name: webserver
     restart: unless-stopped
-    expose: 80
+    expose:
+      - 80
     volumes:
       - ./nginx-conf/nginx.conf:/etc/nginx/conf.d/default.conf
       - certbot-etc:/etc/letsencrypt
@@ -76,7 +77,7 @@ services:
       - memento
     volumes:
       - certbot-etc:/etc/letsen
-        depends_on:
+    depends_on:
           - memento_api_nginx
         command: certonly --webroot --webroot-path=/var/www/html --email sheku.kanneh12@gmail.com --agree-tos --no-eff-email --staging -d memento.sheku-kanneh.comcrypt
       - certbot-var:/var/lib/letsencrypt
