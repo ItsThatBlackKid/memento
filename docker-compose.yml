@@ -34,6 +34,7 @@ services:
       - db
     networks:
       - memento
+      - nginx-proxy
     links:
       - db
     environment:
