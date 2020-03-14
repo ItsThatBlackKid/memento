@@ -18,6 +18,6 @@ RUN npm run build
 COPY --chown=root:root . .
 
 
-EXPOSE 8000
+EXPOSE 80
 
 CMD npm run start-build
