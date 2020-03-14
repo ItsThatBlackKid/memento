@@ -4,6 +4,9 @@ volumes:
   certbot-etc:
   certbot-var:
 networks:
+  default:
+    external: true
+    name: nginx-proxy
   memento:
     name: memento
     driver: bridge
