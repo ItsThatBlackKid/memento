@@ -79,6 +79,6 @@ services:
       - certbot-etc:/etc/letsen
     depends_on:
           - memento_api_nginx
-        command: certonly --webroot --webroot-path=/var/www/html --email sheku.kanneh12@gmail.com --agree-tos --no-eff-email --staging -d memento.sheku-kanneh.comcrypt
+    command: certonly --webroot --webroot-path=/var/www/html --email sheku.kanneh12@gmail.com --agree-tos --no-eff-email --staging -d memento.sheku-kanneh.comcrypt
       - certbot-var:/var/lib/letsencrypt
 
