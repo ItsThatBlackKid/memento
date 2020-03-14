@@ -34,6 +34,8 @@ services:
       - db
     networks:
       - memento
+    expose:
+      - 8000
     links:
       - db
     environment:
