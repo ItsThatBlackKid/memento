@@ -36,8 +36,6 @@ services:
       - memento
     links:
       - db
-    ports:
-      - "8000:80"
     environment:
       - VIRTUAL_HOST=memento.sheku-kanneh.com
       - MONGO_HOST=mongo:27017
