@@ -6,12 +6,12 @@ volumes:
 networks:
   default:
     external: true
-    name: nginx-proxy
+      name: nginx-proxy
   memento:
     name: memento
     driver: bridge
 services:
-  #memento api
+  #memento db
   db:
     image: mongo
     restart: always
@@ -22,6 +22,7 @@ services:
       - memento
     ports:
       - 27017:27017
+  # memento api
   api:
     build:
       context: .
@@ -36,6 +37,8 @@ services:
     links:
       - db
     environment:
+      - VIRTUAL_HOST:memento.sheku-kanneh.com
+      - VIRTUAL_PORT: 8080
       - MONGO_HOST=mongo:27017
       - PORT=8000
     #ports:
