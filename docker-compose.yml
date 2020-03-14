@@ -37,7 +37,7 @@ services:
     links:
       - db
     environment:
-      - VIRTUAL_HOST:memento.sheku-kanneh.com
+      - VIRTUAL_HOST:memento.sheku-kanneh.com/graphql
       - VIRTUAL_PORT:8000
       - MONGO_HOST=mongo:27017
       - PORT=8000
