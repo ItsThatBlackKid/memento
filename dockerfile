@@ -7,8 +7,7 @@ WORKDIR /srv/memento/api
 COPY package*.json ./
 USER root
 
-RUN npm i -g npm-install-changed
-RUN npm-install-changed
+RUN npm i
 
 COPY --chown=root:root . .
 
