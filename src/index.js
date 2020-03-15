@@ -2,12 +2,10 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import mongoose from "mongoose";
-import apollo from "apollo-server-express"
-const {ApolloServer} = apollo;
+import {ApolloServer} from "apollo-server-express"
 import cookieParser from 'cookie-parser'
 import resolvers from './resolvers.js';
 import typeDefs from "./schema.js";
-import graphqlHTTP from "express-graphql";
 
 mongoose.Promise = global.Promise;
 mongoose.connect(`mongodb://${process.env.MONGO_HOST || "localhost"}/memento`, {
