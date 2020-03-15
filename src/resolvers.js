@@ -77,6 +77,7 @@ const resolvers = {
                     const {errors, data} = await makePromise(execute(link, {query: GET_USER}));
 
                     if (errors) {
+                        console.log(errors);
                         throw errors;
                     }
                     console.log(data.getUser);
