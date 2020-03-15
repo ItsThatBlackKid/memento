@@ -6,7 +6,7 @@ import {execute, makePromise} from "apollo-link";
 import fetch from "node-fetch"
 import {isEmpty} from "lodash";
 
-const uri = process.env.AUTH_URI || "http://test-sheku.com:5000/api";
+const uri = process.env.AUTH_URI + "/api" || "http://test-sheku.com:5000/api";
 
 
 const GET_USER = gql`
