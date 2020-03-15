@@ -17,7 +17,7 @@ services:
     restart: always
     container_name: mongo
     volumes:
-    - ./data:/data/db
+    - mongo_data:/data/db
     networks:
       - memento
     ports:
@@ -42,23 +42,6 @@ services:
       - VIRTUAL_PORT=8000
       - MONGO_HOST=mongo:27017
       - PORT=8000
-    #ports:
-     # - '8000:8000'
-  #memento db
 
-  #memento client
-#  client:
-#    build:
-#      context: ./memento-ui
-#      dockerfile: Dockerfile
-#    ports:
-#      - '8080:8080'
-#    networks:
-#      - memento
-#    volumes:
-#      - web-root:/srv/memento/ui/build
-#    image: client:memento
-#    container_name: mementoclient
-#    restart: unless-stopped
 
 

@@ -1,5 +1,3 @@
-import {makeExecutableSchema} from 'graphql-tools';
-import {resolvers} from './resolvers';
 import {gql} from "apollo-server-express"
 
 const typeDefs = gql`

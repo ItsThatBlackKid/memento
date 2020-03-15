@@ -1,15 +1,13 @@
 {
   "name": "memento",
+  "type": "module",
   "version": "1.0.0",
   "description": "mental health journal built for me, by me.",
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --ignore 'memento-ui/' src/index.js --exec babel-node -e js",
-    "start-build": "node ./build/index.js",
-    "prebuild": "npm run clean",
-    "build": "babel ./src -d ./build  --ignore node_modules,memento-ui",
-    "clean": "rm -rf ./build"
+    "debug": "nodemon --ignore 'memento-ui/' src/index.js --exec babel-node -e js",
+    "start": "node --experimental-modules ./src/index.js",
   },
   "author": "Sao Sheku Kanneh",
   "license": "MIT",

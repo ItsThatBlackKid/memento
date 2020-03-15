@@ -10,13 +10,8 @@ USER root
 RUN npm i -g npm-install-changed
 RUN npm-install-changed
 
-COPY . .
-
-
-RUN npm run build
-
 COPY --chown=root:root . .
 
 EXPOSE 8000
 
-CMD npm run start-build
+CMD npm run start

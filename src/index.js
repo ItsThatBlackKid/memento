@@ -11,7 +11,11 @@ import graphqlHTTP from "express-graphql";
 mongoose.Promise = global.Promise;
 mongoose.connect(`mongodb://${process.env.MONGO_HOST || "localhost"}/memento`, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    // useUnifiedTopology: true
+}).then(() => {
+    console.log("DB Connected")
+}).catch(err => {
+    console.log("Error:", err.message)
 });
 
 
