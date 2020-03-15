@@ -2,10 +2,11 @@ import express from "express";
 import cors from "cors";
 import morgan from "morgan";
 import mongoose from "mongoose";
-import {ApolloServer} from "apollo-server-express";
+import apollo from "apollo-server-express"
+const {ApolloServer} = apollo;
 import cookieParser from 'cookie-parser'
-import resolvers from './resolvers';
-import typeDefs from "./schema";
+import resolvers from './resolvers.js';
+import typeDefs from "./schema.js";
 import graphqlHTTP from "express-graphql";
 
 mongoose.Promise = global.Promise;

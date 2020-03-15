@@ -1,12 +1,13 @@
-import Memento from './models/memento';
-import User from './models/user'
+import Memento from './models/memento.js';
+import User from './models/user.js'
 import gql from "graphql-tag"
-import {HttpLink} from "apollo-link-http"
-import {execute, makePromise} from "apollo-link"
+import httpLink from "apollo-link-http";
+const {HttpLink} = httpLink;
+import link from "apollo-link";
+const {execute, makePromise} = link;
 import fetch from "node-fetch"
-import {InMemoryCache} from "apollo-cache-inmemory";
-import {isEmpty} from "lodash/core";
-import {createApolloFetch} from "apollo-fetch";
+import _ from "lodash";
+const {iEmpty} = _;
 
 const uri = process.env.AUTH_URI || "http://test-sheku.com:5000/api";
 

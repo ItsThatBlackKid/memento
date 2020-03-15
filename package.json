@@ -6,7 +6,7 @@
   "main": "src/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "debug": "nodemon --ignore 'memento-ui/' src/index.js --exec babel-node -e js",
+    "debug": "nodemon ./src/index.js",
     "start": "node --experimental-modules ./src/index.js"
   },
   "author": "Sao Sheku Kanneh",
@@ -25,6 +25,7 @@
     "graphql": "^14.6.0",
     "graphql-tag": "^2.10.3",
     "graphql-tools": "^4.0.7",
+    "lodash": "^4.17.15",
     "mongoose": "^5.9.3",
     "morgan": "^1.9.1",
     "node-fetch": "^2.6.0",
