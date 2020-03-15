@@ -7,7 +7,7 @@ import link from "apollo-link";
 const {execute, makePromise} = link;
 import fetch from "node-fetch"
 import _ from "lodash";
-const {iEmpty} = _;
+const {isEmpty} = _;
 
 const uri = process.env.AUTH_URI || "http://test-sheku.com:5000/api";
 
