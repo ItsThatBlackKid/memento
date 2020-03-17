@@ -39,6 +39,7 @@ services:
       - db
     environment:
       - VIRTUAL_HOST=memento.sheku-kanneh.com
+      - LETSENCRYPT_HOST=memento.sheku-kanneh.com
       - VIRTUAL_PORT=8000
       - MONGO_HOST=mongo:27017
       - PORT=8000
